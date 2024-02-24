@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/productProgressBar"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/kanit_extra_bold"
+        android:text="Booking Details"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+
+        android:textStyle="bold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ProductsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_above="@+id/ProductsFloatingBtnId"
+        android:layout_margin="10dp" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ProductsFloatingBtnId"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/kanit_regular"
+        android:text="Add Booking Details"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

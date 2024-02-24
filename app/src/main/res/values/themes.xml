@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.BookingApplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">#003580</item>
+         <item name="colorPrimaryDark">#003580</item>
+         <item name="colorAccent">#003580</item>
+    </style>
+
+    <style name="Theme.BookingApplication" parent="Base.Theme.BookingApplication" />
+</resources>
