@@ -15,8 +15,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        setProperty("archivesBaseName", "FamilyWellness-$versionName")
-
+        setProperty("archivesBaseName", "BookingApp-$versionName")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

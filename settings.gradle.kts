@@ -18,5 +18,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Booking App"
+rootProject.name = "SM walk in"
 include(":app")

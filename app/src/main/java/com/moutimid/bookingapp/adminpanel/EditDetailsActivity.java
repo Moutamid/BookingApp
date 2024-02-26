@@ -1,14 +1,16 @@
 package com.moutimid.bookingapp.adminpanel;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +23,9 @@ public class EditDetailsActivity extends AppCompatActivity {
 
     private EditText timeEditText, nameEditText, contactEditText, buzzerEditText, guestsEditText;
     String key;
+    boolean is_booked, is_seated;
+    CheckBox booked, seated;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,9 @@ public class EditDetailsActivity extends AppCompatActivity {
         contactEditText = findViewById(R.id.contact_number);
         buzzerEditText = findViewById(R.id.buzzer_number);
         guestsEditText = findViewById(R.id.no_of_guests);
+        booked = findViewById(R.id.booked);
+        seated = findViewById(R.id.seated);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference().child("BookingApp").child("Details");
 
@@ -44,6 +52,8 @@ public class EditDetailsActivity extends AppCompatActivity {
             String contact = intent.getStringExtra("contact");
             String buzzer = intent.getStringExtra("buzzer");
             String guests = intent.getStringExtra("guests");
+            is_booked = intent.getBooleanExtra("book", false);
+            is_seated = intent.getBooleanExtra("seat", false);
 
             // Display the details in EditText fields for editing
             timeEditText.setText(time);
@@ -51,10 +61,28 @@ public class EditDetailsActivity extends AppCompatActivity {
             contactEditText.setText(contact);
             buzzerEditText.setText(buzzer);
             guestsEditText.setText(guests);
+            if (is_booked) {
+                booked.setChecked(true);
+            }
+            if (is_seated) {
+                seated.setChecked(true);
+            }
+            booked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    is_booked = b;
+                }
+            });
+            seated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    is_seated=b;
+                }
+            });
         }
 
-        // Add save button click listener
-        findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.update).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the updated details from EditText fields
@@ -82,7 +110,7 @@ public class EditDetailsActivity extends AppCompatActivity {
                     return;
                 }
                 // Create a Booking object
-                BookingModel booking = new BookingModel(key, updatedTime, updatedName, updatedContact, updatedBuzzer, updatedGuests);
+                BookingModel booking = new BookingModel(key, updatedTime, updatedName, updatedContact, updatedBuzzer, updatedGuests, is_booked, is_seated);
 
                 // Push the Booking object to the database
                 myRef.child(key).setValue(booking).addOnCompleteListener(new OnCompleteListener<Void>() {

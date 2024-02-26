@@ -10,11 +10,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.bookingapp.R;
-import com.moutimid.bookingapp.MainActivity;
-import com.moutimid.bookingapp.adminpanel.AdminActivity;
 import com.moutimid.bookingapp.adminpanel.AllBookingActivity;
 
 import java.util.Objects;
@@ -51,32 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            if (auth.getCurrentUser().getEmail().equals("adminbooking@gmail.com")) {
-                startActivity(new Intent(LoginActivity.this, AdminActivity.class));
-                finish();
-            }
-            else
-            {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            }
+            startActivity(new Intent(LoginActivity.this, AllBookingActivity.class));
+            finish();
         }
-        // set the view now
         setContentView(R.layout.activity_login);
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        Animation bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
-
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (TextView) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (TextView) findViewById(R.id.btn_reset_password);
-        LinearLayout main_layout = findViewById(R.id.main_layout);
-//        main_layout.setAnimation(bottomAnim);
-
         auth = FirebaseAuth.getInstance();
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -136,14 +115,8 @@ public class LoginActivity extends AppCompatActivity {
                                     lodingbar.setCancelable(false);
                                     lodingbar.show();
 
-                                    if (email.equals("adminbooking@gmail.com")) {
-                                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                                        startActivity(intent);
-                                        show_toast("Successfully Login", 1);
-                                        lodingbar.dismiss();
-                                        finish();
-                                    } else {
-                                        FirebaseDatabase.getInstance().getReference().child("BookingApp").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                    FirebaseDatabase.getInstance().getReference().child("BookingApp").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String name = snapshot.child("name").getValue().toString();
@@ -152,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                                Stash.put("password", password);
                                                 show_toast("Successfully Login", 1);
                                                 lodingbar.dismiss();
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                Intent intent = new Intent(LoginActivity.this, AllBookingActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
@@ -162,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             }
                                         });
-                                    }
+
                                 }
                             }
                         });

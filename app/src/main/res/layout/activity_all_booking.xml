@@ -9,6 +9,15 @@
         android:id="@+id/productProgressBar"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:src="@drawable/logout"
+        android:onClick="logout"
+        android:layout_marginEnd="@dimen/_20sdp"
+        />
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -17,16 +26,20 @@
         android:fontFamily="@font/kanit_extra_bold"
         android:text="Booking Details"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"
+        android:textSize="25dp"
 
         android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ProductsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title"
         android:layout_above="@+id/ProductsFloatingBtnId"
-        android:layout_margin="10dp" />
+        android:layout_below="@+id/title"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
 
 
     <androidx.appcompat.widget.AppCompatButton

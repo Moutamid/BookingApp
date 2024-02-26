@@ -10,11 +10,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moutamid.bookingapp.R;
-import com.moutimid.bookingapp.MainActivity;
+import com.moutimid.bookingapp.adminpanel.AllBookingActivity;
 import com.moutimid.bookingapp.adminpanel.model.UserModel;
 
 import java.util.Objects;
@@ -129,7 +126,7 @@ public class SignupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             show_toast("Account is created successfully", 1);
-                                            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                            startActivity(new Intent(SignupActivity.this, AllBookingActivity.class));
                                             lodingbar.dismiss();
                                             finishAffinity();
 

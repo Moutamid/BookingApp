@@ -87,4 +87,5 @@ public class BookingModel {
     public void setNo_of_guest(String no_of_guest) {
         this.no_of_guest = no_of_guest;
     }
+
 }

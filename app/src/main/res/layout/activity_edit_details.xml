@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:onClick="back"
@@ -28,7 +28,8 @@
         android:id="@+id/main_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="@dimen/_15sdp"        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
 
 
@@ -51,6 +52,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edit_bg"
+            android:editable="false"
+            android:focusable="false"
             android:fontFamily="@font/kanit_regular"
             android:hint="Time"
             android:inputType="textEmailAddress"
@@ -86,6 +89,7 @@
             android:ems="20"
             android:fontFamily="@font/kanit_regular"
             android:hint="Contact Number"
+            android:inputType="number"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#959595" />
@@ -96,14 +100,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-
             android:layout_marginEnd="30dp"
+
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_bg"
             android:drawablePadding="12dp"
             android:ems="20"
             android:fontFamily="@font/kanit_regular"
             android:hint="Buzzer Number"
+            android:inputType="number"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#959595" />
@@ -114,24 +119,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-
             android:layout_marginEnd="30dp"
+
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_bg"
             android:drawablePadding="12dp"
             android:ems="20"
             android:fontFamily="@font/kanit_regular"
             android:hint="No of Guests"
+            android:inputType="number"
+
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#959595" />
 
+        <CheckBox
+            android:id="@+id/booked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/number_of_guests"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="5dp"
+            android:text="table is ready" />
+
+        <CheckBox
+            android:id="@+id/seated"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/number_of_guests"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="20dp"
+            android:text="table is seated" />
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/save_button"
+            android:id="@+id/update"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/roundbutton"
             android:fontFamily="@font/kanit_medium"

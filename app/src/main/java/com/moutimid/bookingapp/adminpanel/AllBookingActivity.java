@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,13 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.moutamid.bookingapp.R;
 import com.moutimid.bookingapp.adminpanel.adapter.AllBookingAdapter;
 import com.moutimid.bookingapp.adminpanel.model.BookingModel;
+import com.moutimid.bookingapp.authetications.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AllBookingActivity extends AppCompatActivity {
-
 
     private RecyclerView ProductsRecycler;
     private AllBookingAdapter adapter;
@@ -96,6 +97,8 @@ public class AllBookingActivity extends AppCompatActivity {
                 intent.putExtra("contact", selectedBooking.getContact_no());
                 intent.putExtra("buzzer", selectedBooking.getBuzzer_no());
                 intent.putExtra("guests", selectedBooking.getNo_of_guest());
+                intent.putExtra("book", selectedBooking.isBooked());
+                intent.putExtra("seat", selectedBooking.isSeated());
                 startActivityForResult(intent, EDIT_DETAILS_REQUEST_CODE);
             }
         });
@@ -141,4 +144,29 @@ public class AllBookingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     adapter.notifyDataSetChanged();}
+    public void logout(View view) {
+        androidx.appcompat.app.AlertDialog.Builder checkAlert = new androidx.appcompat.app.AlertDialog.Builder(AllBookingActivity.this);
+        checkAlert.setMessage("Do you want to Logout?")
+                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth mAuth;
+                        mAuth = FirebaseAuth.getInstance();
+
+                        mAuth.signOut();
+                        Intent intent = new Intent(AllBookingActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        androidx.appcompat.app.AlertDialog alert = checkAlert.create();
+        alert.setTitle("LogOut");
+        alert.show();
+    }
 }

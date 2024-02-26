@@ -1,10 +1,15 @@
 package com.moutimid.bookingapp.adminpanel;
+
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -19,28 +24,40 @@ import java.util.Locale;
 public class AddNewDetailsActivity extends AppCompatActivity {
 
     private EditText timeEditText, nameEditText, contactEditText, buzzerEditText, guestsEditText;
+    CheckBox booked, seated;
+    boolean booked_val=false, seated_val=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.moutamid.bookingapp.R.layout.activity_add_new_details);
 
-        // Initialize EditText fields
         timeEditText = findViewById(R.id.name);
         nameEditText = findViewById(R.id.email);
         contactEditText = findViewById(R.id.contact_number);
         buzzerEditText = findViewById(R.id.buzzer_number);
         guestsEditText = findViewById(R.id.no_of_guests);
+        booked = findViewById(R.id.booked);
+        seated = findViewById(R.id.seated);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String currentTime = sdf.format(calendar.getTime());
         timeEditText.setText(currentTime);
-
-        // Initialize Firebase Database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference().child("BookingApp").child("Details");
-
-        // Add button click listener
+        booked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                booked_val = b;
+            }
+        });
+        seated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                seated_val=b;
+            }
+        });
         findViewById(R.id.sign_up_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +67,6 @@ public class AddNewDetailsActivity extends AppCompatActivity {
                 String buzzer = buzzerEditText.getText().toString().trim();
                 String guests = guestsEditText.getText().toString().trim();
 
-                // Check for empty fields and show error if any
                 if (time.isEmpty()) {
                     timeEditText.setError("Time is required");
                     timeEditText.requestFocus();
@@ -69,17 +85,15 @@ public class AddNewDetailsActivity extends AppCompatActivity {
                     return;
                 }
                 String key = myRef.push().getKey();
-                // Create a Booking object
-                BookingModel booking = new BookingModel(key, time, name, contact, buzzer, guests, false, false);
-
-                // Push the Booking object to the database
+                BookingModel booking = new BookingModel(key, time, name, contact, buzzer, guests, booked_val, seated_val);
                 myRef.child(key).setValue(booking).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(AddNewDetailsActivity.this, "Booking added successfully", Toast.LENGTH_SHORT).show();
-                            finish(); // Finish the activity after successful addition
-                        } else {
+                            finish();
+                        }
+                        else {
                             Toast.makeText(AddNewDetailsActivity.this, "Failed to add booking", Toast.LENGTH_SHORT).show();
                         }
                     }
