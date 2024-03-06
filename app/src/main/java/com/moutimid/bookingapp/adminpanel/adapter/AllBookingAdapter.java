@@ -81,19 +81,19 @@ public class AllBookingAdapter extends RecyclerView.Adapter<AllBookingAdapter.Pr
         });
 
         if (bookingModels.get(position).isBooked() && bookingModels.get(position).isSeated()) {
-            holder.booked.setText("Booked: true");
+            holder.booked.setText("Table ready: true");
             holder.seated.setText("Seated: true");
             holder.PrContainer.setBackgroundColor(Color.parseColor("#8BC34A"));
         } else if (!bookingModels.get(position).isBooked() && bookingModels.get(position).isSeated()) {
-            holder.booked.setText("Booked: false");
+            holder.booked.setText("Table ready: false");
             holder.seated.setText("Seated: true");
             holder.PrContainer.setBackgroundColor(Color.parseColor("#ECE131"));
         } else if (bookingModels.get(position).isBooked() && !bookingModels.get(position).isSeated()) {
-            holder.booked.setText("Booked: true");
+            holder.booked.setText("Table ready: true");
             holder.seated.setText("Seated: false");
             holder.PrContainer.setBackgroundColor(Color.parseColor("#ECE131"));
         } else {
-            holder.booked.setText("Booked: false");
+            holder.booked.setText("Table ready: false");
             holder.seated.setText("Seated: false");
             holder.PrContainer.setBackgroundColor(Color.parseColor("#f51b00"));
         }
