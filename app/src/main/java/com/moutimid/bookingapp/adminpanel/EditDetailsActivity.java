@@ -112,7 +112,6 @@ public class EditDetailsActivity extends AppCompatActivity {
                 // Create a Booking object
                 BookingModel booking = new BookingModel(key, updatedTime, updatedName, updatedContact, updatedBuzzer, updatedGuests, is_booked, is_seated);
 
-                // Push the Booking object to the database
                 myRef.child(key).setValue(booking).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
