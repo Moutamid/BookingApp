@@ -3,6 +3,7 @@ package com.moutimid.bookingapp.adminpanel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -109,6 +110,17 @@ public class EditDetailsActivity extends AppCompatActivity {
                     guestsEditText.requestFocus();
                     return;
                 }
+                Log.d("BookingModel", "Key: " + key);
+                Log.d("BookingModel", "Updated Time: " + updatedTime);
+                Log.d("BookingModel", "Updated Name: " + updatedName);
+                Log.d("BookingModel", "Updated Contact: " + updatedContact);
+                Log.d("BookingModel", "Updated Buzzer: " + updatedBuzzer);
+                Log.d("BookingModel", "Updated Guests: " + updatedGuests);
+                Log.d("BookingModel", "Is Booked: " + is_booked);
+                Log.d("BookingModel", "Is Seated: " + is_seated);
+
+// Create a Booking object
+
                 // Create a Booking object
                 BookingModel booking = new BookingModel(key, updatedTime, updatedName, updatedContact, updatedBuzzer, updatedGuests, is_booked, is_seated);
 

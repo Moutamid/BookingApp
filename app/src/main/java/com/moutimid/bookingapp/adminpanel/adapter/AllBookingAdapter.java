@@ -68,16 +68,14 @@ public class AllBookingAdapter extends RecyclerView.Adapter<AllBookingAdapter.Pr
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText("Name: "+bookingModels.get(position).getName());
         holder.time.setText("Time: "+bookingModels.get(position).getTime());
-//        holder.contact_no.setText("Contact No: "+bookingModels.get(position).getContact_no());
         holder.buzzer_no.setText("Buzzer Number: " + bookingModels.get(position).getBuzzer_no() + "  ");
         holder.no_of_guest.setText("No. of guests: " + bookingModels.get(position).getNo_of_guest() + "  ");
-// Assuming contactTextView is the TextView containing the mobile number
         holder.contact_no.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 holder.contact_no.setText("Contact No: " + bookingModels.get(position).getContact_no());
-                return true; // Returning true indicates that the long click event has been consumed
-            }
+                return true;
+                }
         });
 
         if (bookingModels.get(position).isBooked() && bookingModels.get(position).isSeated()) {
@@ -97,15 +95,14 @@ public class AllBookingAdapter extends RecyclerView.Adapter<AllBookingAdapter.Pr
             holder.seated.setText("Seated: false");
             holder.PrContainer.setBackgroundColor(Color.parseColor("#f51b00"));
         }
-
         holder.contact_no.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     holder.contact_no.setText("Contact No: ********");
                 }
-                return false; // Allow other touch events to be handled
-            }
+                return false;
+                }
         });
     }
 
