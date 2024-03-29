@@ -5,6 +5,7 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
+
 android {
     namespace = "com.moutamid.bookingapp"
     compileSdk = 34
